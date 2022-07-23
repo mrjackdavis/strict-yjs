@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.settings.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "composite": true
+  },
+  "include": ["src"],
+  "exclude": ["dist", ".rollup.cache"],
+  "references": [
+    {
+      "path": "../utils"
+    }
+  ]
+}

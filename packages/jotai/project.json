@@ -1,0 +1,45 @@
+{
+  "root": "packages/jotai",
+  "sourceRoot": "packages/jotai/src",
+  "projectType": "library",
+  "targets": {
+    "buildTsc": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "packages/jotai/dist",
+        "main": "packages/jotai/src/index.ts",
+        "tsConfig": "packages/jotai/tsconfig.lib.json",
+        "assets": ["packages/jotai/*.md"]
+      }
+    },
+    "start": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "yarn workspace @strict-yjs/jotai build"
+          }
+        ]
+      },
+      "outputs": ["packages/jotai/dist"]
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/jotai/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/packages/jotai"],
+      "options": {
+        "jestConfig": "packages/jotai/jest.config.js",
+        "passWithNoTests": false,
+        "detectOpenHandles": true
+      }
+    }
+  },
+  "tags": []
+}

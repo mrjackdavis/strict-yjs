@@ -1,0 +1,9 @@
+.yarn/*
+!.yarn/releases
+!.yarn/plugins
+.pnp.*
+infra
+**/build/**/*
+**/tmp/**/*
+workspaces/infra2
+**/node_modules
