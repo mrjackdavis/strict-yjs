@@ -1,4 +1,4 @@
-import { t } from "@strict-yjs/utils";
+import { t } from "./utils";
 import { Either } from "fp-ts/lib/Either";
 import { atom } from "jotai";
 import * as Y from "yjs";

@@ -1,5 +1,5 @@
 import * as YjsJotai from "../index";
-import { assert, t } from "@strict-yjs/utils";
+import { assert, t } from "./utils";
 import * as Y from "yjs";
 import { Store } from "./Store";
 
@@ -75,7 +75,7 @@ describe("YjsJotai.map", () => {
       });
     });
   });
-  describe("using a YjsJotai codec", () => {
+  describe("using a joyjio codec", () => {
     const innerCodec = YjsJotai.type(
       t.type({
         a: t.string,

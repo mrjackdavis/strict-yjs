@@ -1,8 +1,7 @@
-import * as YjsJotai from "../index";
-import { assert, t } from "@strict-yjs/utils";
 import * as Y from "yjs";
+import * as YjsJotai from "../index";
 import { Store } from "./Store";
-import { atom } from "jotai";
+import { assert, t } from "./utils";
 
 describe("YjsJotai.array", () => {
   describe("using a simple codec", () => {

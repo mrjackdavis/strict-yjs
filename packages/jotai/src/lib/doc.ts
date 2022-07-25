@@ -1,13 +1,8 @@
-import { t } from "@strict-yjs/utils";
 import { Either } from "fp-ts/lib/Either";
 import { atom, Atom } from "jotai";
 import * as Y from "yjs";
-import {
-  YjsJotaiAtom,
-  YjsJotaiCodec,
-  MixedYjsJotaiAtom,
-  ValidYTypesForYjsJotai,
-} from "./common";
+import { ValidYTypesForYjsJotai, YjsJotaiAtom, YjsJotaiCodec } from "./common";
+import { t } from "./utils";
 
 type YjsJotaiMixedCodec<YType extends ValidYTypesForYjsJotai> = YjsJotaiCodec<
   YjsJotaiAtom<YType, any, any, void | Promise<void>>,

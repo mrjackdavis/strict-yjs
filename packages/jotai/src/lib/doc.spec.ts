@@ -1,5 +1,5 @@
 import * as YjsJotai from "./index";
-import { assert, t } from "@strict-yjs/utils";
+import { assert, t } from "./utils";
 import * as Y from "yjs";
 import { Store } from "./Store";
 

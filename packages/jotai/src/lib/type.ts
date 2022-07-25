@@ -1,11 +1,11 @@
-import { t } from "@strict-yjs/utils";
 import { Either } from "fp-ts/lib/Either";
+import { t } from "./utils";
 import { atom } from "jotai";
 import * as Y from "yjs";
 import {
+  mutateAtomWithYjsJotaiMetadata,
   YjsJotaiAtom,
   YjsJotaiCodec,
-  mutateAtomWithYjsJotaiMetadata,
   YMapDomain,
   yMapToShallowJson,
 } from "./common";
