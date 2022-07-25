@@ -6,7 +6,8 @@
   "types": "./dist/src/index.d.ts",
   "devDependencies": {
     "@rollup/plugin-typescript": "^8.3.0",
-    "fp-ts": "^2.9.3",
+    "fp-ts": "^2.12.2",
+    "io-ts": "^2.2.16",
     "jotai": "^1.7.5",
     "nodemon": "^2.0.12",
     "react": "^18.0.0",
@@ -16,7 +17,8 @@
     "yjs": "^13.5.24"
   },
   "peerDependencies": {
-    "fp-ts": "^2.9.3",
+    "io-ts": "^2.2.16",
+    "fp-ts": "^2.12.2",
     "jotai": "^1.7.5",
     "react": "^18.0.0",
     "yjs": "^13.5.24"
