@@ -10,6 +10,8 @@
     "io-ts": "^2.2.16",
     "io-ts-types": "^0.5.16",
     "jotai": "^1.7.5",
+    "monocle-ts": "^2.3.13",
+    "newtype-ts": "^0.3.5",
     "nodemon": "^2.0.12",
     "react": "^18.0.0",
     "rollup": "^2.64.0",
