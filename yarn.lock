@@ -2321,7 +2321,6 @@ __metadata:
   resolution: "@strict-yjs/jotai@workspace:packages/jotai"
   dependencies:
     "@rollup/plugin-typescript": ^8.3.0
-    "@strict-yjs/utils": "workspace:*"
     fp-ts: ^2.9.3
     jotai: ^1.7.5
     nodemon: ^2.0.12
@@ -2335,24 +2334,6 @@ __metadata:
     jotai: ^1.7.5
     react: ^18.0.0
     yjs: ^13.5.24
-  languageName: unknown
-  linkType: soft
-
-"@strict-yjs/utils@workspace:*, @strict-yjs/utils@workspace:packages/utils":
-  version: 0.0.0-use.local
-  resolution: "@strict-yjs/utils@workspace:packages/utils"
-  dependencies:
-    "@types/lodash": ^4.14.178
-    "@types/uuid": ^8.3.4
-    date-fns: ^2.16.1
-    fp-ts: ^2.9.3
-    io-ts: ^2.2.13
-    io-ts-types: ^0.5.12
-    lodash: ^4.17.20
-    monocle-ts: ^2.3.3
-    newtype-ts: ^0.3.4
-    nodemon: ^2.0.12
-    typescript: ^4.7.4
   languageName: unknown
   linkType: soft
 
@@ -2794,13 +2775,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lodash@npm:^4.14.178":
-  version: 4.14.178
-  resolution: "@types/lodash@npm:4.14.178"
-  checksum: a69a04a60bfc5257c3130a554b4efa0c383f0141b7b3db8ab7cf07ad2a46ea085fce66d0242da41da7e5647b133d5dfb2c15add9cbed8d7fef955e4a1e5b3128
-  languageName: node
-  linkType: hard
-
 "@types/mime@npm:^1":
   version: 1.3.2
   resolution: "@types/mime@npm:1.3.2"
@@ -2914,13 +2888,6 @@ __metadata:
   version: 2.0.1
   resolution: "@types/stack-utils@npm:2.0.1"
   checksum: 205fdbe3326b7046d7eaf5e494d8084f2659086a266f3f9cf00bccc549c8e36e407f88168ad4383c8b07099957ad669f75f2532ed4bc70be2b037330f7bae019
-  languageName: node
-  linkType: hard
-
-"@types/uuid@npm:^8.3.4":
-  version: 8.3.4
-  resolution: "@types/uuid@npm:8.3.4"
-  checksum: 6f11f3ff70f30210edaa8071422d405e9c1d4e53abbe50fdce365150d3c698fe7bbff65c1e71ae080cbfb8fded860dbb5e174da96fdbbdfcaa3fb3daa474d20f
   languageName: node
   linkType: hard
 
@@ -6972,27 +6939,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"io-ts-types@npm:^0.5.12":
-  version: 0.5.16
-  resolution: "io-ts-types@npm:0.5.16"
-  peerDependencies:
-    fp-ts: ^2.0.0
-    io-ts: ^2.0.0
-    monocle-ts: ^2.0.0
-    newtype-ts: ^0.3.2
-  checksum: 39b5c5639d7351264c8ee26f30fa71f7feb42225472fe8f3e489e5a50f1a2009b8e982dcdbfc977c69261f3fbd71cda6edcd7c2a7f96145cb1ba2879f65a1e77
-  languageName: node
-  linkType: hard
-
-"io-ts@npm:^2.2.13":
-  version: 2.2.16
-  resolution: "io-ts@npm:2.2.16"
-  peerDependencies:
-    fp-ts: ^2.5.0
-  checksum: 1b5855682e413cc92cfb5c51d0bdb24c99e407ab4e67821a53078f5d8dedbc387840c5b240cb19dd5d542bbdd2e2317ece17674a674f3de561ca0f00ae765bba
-  languageName: node
-  linkType: hard
-
 "ip@npm:^1.1.0, ip@npm:^1.1.5":
   version: 1.1.5
   resolution: "ip@npm:1.1.5"
@@ -8774,15 +8720,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"monocle-ts@npm:^2.3.3":
-  version: 2.3.11
-  resolution: "monocle-ts@npm:2.3.11"
-  peerDependencies:
-    fp-ts: ^2.5.0
-  checksum: b982760f42c40f548fc6fae094c32a82666752cb4463ea7b2af506e8550d9431b625b737bdf008c815a0ce01798b9f0b4bbd1dfa2a06522890f5eebf8e130fcd
-  languageName: node
-  linkType: hard
-
 "ms@npm:2.0.0":
   version: 2.0.0
   resolution: "ms@npm:2.0.0"
@@ -8868,16 +8805,6 @@ __metadata:
   version: 2.6.2
   resolution: "neo-async@npm:2.6.2"
   checksum: deac9f8d00eda7b2e5cd1b2549e26e10a0faa70adaa6fdadca701cc55f49ee9018e427f424bac0c790b7c7e2d3068db97f3093f1093975f2acb8f8818b936ed9
-  languageName: node
-  linkType: hard
-
-"newtype-ts@npm:^0.3.4":
-  version: 0.3.4
-  resolution: "newtype-ts@npm:0.3.4"
-  peerDependencies:
-    fp-ts: ^2.0.0
-    monocle-ts: ^2.0.0
-  checksum: 0863ff0bf5ccf495753eecac513a460a60cb99c3be9afe18e515cb460c4e2b8c2157f6aeb4a6aef04acaeaa534b40a8d89d6d3db6214b386b738200ad925f37f
   languageName: node
   linkType: hard
 

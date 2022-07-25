@@ -17,5 +17,5 @@ jobs:
           node-version: "16"
           cache: "yarn"
       - uses: nrwl/nx-set-shas@v2
-      - run: yarn install --frozen-lockfile
+      - run: yarn install
       - run: yarn nx affected --target=test
