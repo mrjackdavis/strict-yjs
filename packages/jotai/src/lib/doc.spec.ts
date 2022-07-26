@@ -2,12 +2,13 @@ import * as YjsJotai from "./index";
 import { assert, t } from "./utils";
 import * as Y from "yjs";
 import { Store } from "./Store";
+import { DateFromISOString } from "io-ts-types";
 
 describe("YjsJotai.doc", () => {
   // should be able to build codec for entire doc?
   it("gets it done", () => {
     const codec = YjsJotai.doc({
-      foo: YjsJotai.array(t.DateFromISOString),
+      foo: YjsJotai.array(DateFromISOString),
       bar: YjsJotai.type(
         t.type({
           a: t.string,

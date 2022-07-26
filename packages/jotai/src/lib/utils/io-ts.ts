@@ -1,14 +1,13 @@
-import { isLeft } from "fp-ts/lib/Either";
+import { either } from "fp-ts";
 import * as t from "io-ts";
-import { PathReporter } from "io-ts/lib/PathReporter";
+import { PathReporter } from "io-ts/PathReporter";
 export * from "io-ts";
-export * from "io-ts-types";
 
 export function decodeOrThrow<I, A>(codec: t.Decoder<I, A>) {
   return (value: I): A => {
     const result = codec.decode(value);
 
-    if (isLeft(result)) {
+    if (either.isLeft(result)) {
       throw new CodecValidationError(codec, value, PathReporter.report(result));
     }
 

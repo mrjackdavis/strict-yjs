@@ -1,6 +1,7 @@
 {
   "name": "@strict-yjs/jotai",
-  "version": "0.0.1",
+  "version": "0.0.2",
+  "private": false,
   "repository": {
     "url": "https://github.com/mrjackdavis/strict-yjs"
   },
@@ -28,9 +29,5 @@
     "jotai": "^1.7.5",
     "react": "^18.0.0",
     "yjs": "^13.5.24"
-  },
-  "scripts": {
-    "start": "nodemon --on-change-only",
-    "build": "rollup --failAfterWarnings -c ./rollup.config.js"
   }
 }

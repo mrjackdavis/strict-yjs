@@ -6,9 +6,5 @@
   },
   "include": ["src"],
   "exclude": ["dist", ".rollup.cache"],
-  "references": [
-    {
-      "path": "../utils"
-    }
-  ]
+  "references": []
 }

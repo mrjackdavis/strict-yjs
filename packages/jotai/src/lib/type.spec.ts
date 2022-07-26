@@ -2,6 +2,7 @@ import * as YjsJotai from "./index";
 import { assert, t } from "./utils";
 import * as Y from "yjs";
 import { Store } from "./Store";
+import { BooleanFromString, DateFromISOString } from "io-ts-types";
 
 describe("YjsJotai.type", () => {
   const codec = YjsJotai.type(
@@ -101,7 +102,7 @@ describe("YjsJotai.type", () => {
     it("update should encode values when writing to yMap", () => {
       const complexCodec = YjsJotai.type(
         t.partial({
-          a: t.DateFromISOString,
+          a: DateFromISOString,
         })
       );
       Store.closure((store) => {
@@ -214,7 +215,7 @@ describe("YjsJotai.type", () => {
     it("should force strict types", () => {
       const complexCodec = YjsJotai.type(
         t.type({
-          a: t.BooleanFromString,
+          a: BooleanFromString,
         })
       );
       const docCodec = YjsJotai.doc({
