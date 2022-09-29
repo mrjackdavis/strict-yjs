@@ -14,11 +14,18 @@ type YjsJotaiMixedCodec<YType extends ValidYTypesForYjsJotai> = YjsJotaiCodec<
 type DocTypesDefinition = {
   [key: string]: YjsJotaiMixedCodec<any>;
 };
+
+type DocAtom<TDocTypesDefinition extends DocTypesDefinition> = Atom<
+  {
+    [key in keyof TDocTypesDefinition]: t.TypeOf<TDocTypesDefinition[key]>;
+  } & {
+    transact: (fn: () => void) => void;
+  }
+>;
+
 export type DocC<TDocTypesDefinition extends DocTypesDefinition> = t.Decoder<
   Y.Doc,
-  Atom<{
-    [key in keyof TDocTypesDefinition]: t.TypeOf<TDocTypesDefinition[key]>;
-  }>
+  DocAtom<TDocTypesDefinition>
 >;
 
 export const doc = <TDocTypesDefinition extends DocTypesDefinition>(
@@ -27,16 +34,17 @@ export const doc = <TDocTypesDefinition extends DocTypesDefinition>(
   type TypeOfDocTypesDefinition = {
     [key in keyof TDocTypesDefinition]: t.TypeOf<TDocTypesDefinition[key]>;
   };
-  return new t.Type<Atom<TypeOfDocTypesDefinition>, Y.Doc, Y.Doc>(
+
+  return new t.Type<DocAtom<TDocTypesDefinition>, Y.Doc, Y.Doc>(
     `YjsJotaiDocAtom`,
 
     /** a custom type guard */
-    (u: unknown): u is Atom<TypeOfDocTypesDefinition> => {
+    (u: unknown): u is DocAtom<TDocTypesDefinition> => {
       throw new Error("`is` is not implemented");
     },
 
     /** succeeds if a value of type I can be decoded to a value of type A */
-    (input, context): Either<t.Errors, Atom<TypeOfDocTypesDefinition>> => {
+    (input, context): Either<t.Errors, DocAtom<TDocTypesDefinition>> => {
       try {
         const data: TypeOfDocTypesDefinition =
           decodeAllDocDefinitions<TDocTypesDefinition>(
@@ -44,7 +52,10 @@ export const doc = <TDocTypesDefinition extends DocTypesDefinition>(
             docTypesDefinition
           );
 
-        const decodedAtom: Atom<TypeOfDocTypesDefinition> = atom(() => data);
+        const decodedAtom: DocAtom<TDocTypesDefinition> = atom(() => ({
+          ...data,
+          transact: (fn: () => void) => input.transact(fn),
+        })) as DocAtom<TDocTypesDefinition>;
 
         return t.success(decodedAtom);
       } catch (err) {

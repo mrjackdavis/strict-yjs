@@ -30,7 +30,7 @@
         "cwd": "packages/jotai",
         "commands": [
           {
-            "command": "npm publish --dry-run --access public"
+            "command": "npm publish --access public"
           }
         ]
       }
