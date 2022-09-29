@@ -1,12 +1,12 @@
-import * as YjsJotai from "../index";
-import { assert, t } from "@strict-yjs/utils";
 import * as Y from "yjs";
+import * as YjsJotai from "../index";
 import { Store } from "./Store";
-import { atom } from "jotai";
+import { assert, t } from "./utils";
+import { BooleanFromString } from "io-ts-types";
 
 describe("YjsJotai.array", () => {
   describe("using a simple codec", () => {
-    const codec = YjsJotai.array(t.BooleanFromString);
+    const codec = YjsJotai.array(BooleanFromString);
 
     it("should return an array of decoded values", () => {
       Store.closure((store) => {
@@ -128,7 +128,7 @@ describe("YjsJotai.array", () => {
   });
   describe("array.make", () => {
     it("should force strict types", () => {
-      const complexCodec = YjsJotai.array(t.BooleanFromString);
+      const complexCodec = YjsJotai.array(BooleanFromString);
       const docCodec = YjsJotai.doc({
         things: YjsJotai.type(
           t.type({

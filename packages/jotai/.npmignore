@@ -1,0 +1,8 @@
+/.rollup.cache/
+src/
+
+/**/tsconfig.*
+project.json
+nodemon.json
+jest.config.js
+/*.config.*

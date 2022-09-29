@@ -6,9 +6,6 @@
   "references": [
     {
       "path": "packages/jotai"
-    },
-    {
-      "path": "packages/utils"
     }
   ]
 }

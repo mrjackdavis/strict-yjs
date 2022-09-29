@@ -1,11 +1,12 @@
 import * as YjsJotai from "../index";
-import { assert, t } from "@strict-yjs/utils";
+import { assert, t } from "./utils";
 import * as Y from "yjs";
 import { Store } from "./Store";
+import { NonEmptyString, BooleanFromString } from "io-ts-types";
 
 describe("YjsJotai.map", () => {
   describe("using a simple codec", () => {
-    const codec = YjsJotai.map(t.NonEmptyString, t.BooleanFromString);
+    const codec = YjsJotai.map(NonEmptyString, BooleanFromString);
 
     it("should return an map of decoded values", () => {
       Store.closure((store) => {
@@ -37,8 +38,8 @@ describe("YjsJotai.map", () => {
         store.sub(myAtom);
 
         store.set(myAtom, (_current, op) => {
-          op.set("1" as t.NonEmptyString, false);
-          op.set("2" as t.NonEmptyString, true);
+          op.set("1" as NonEmptyString, false);
+          op.set("2" as NonEmptyString, true);
         });
 
         const res = store.get(myAtom);
@@ -64,7 +65,7 @@ describe("YjsJotai.map", () => {
         store.sub(myAtom);
 
         store.set(myAtom, (_current, op) => {
-          op.delete("2" as t.NonEmptyString);
+          op.delete("2" as NonEmptyString);
         });
         const res = store.get(myAtom);
 
@@ -75,13 +76,13 @@ describe("YjsJotai.map", () => {
       });
     });
   });
-  describe("using a YjsJotai codec", () => {
+  describe("using a joyjio codec", () => {
     const innerCodec = YjsJotai.type(
       t.type({
         a: t.string,
       })
     );
-    const codec = YjsJotai.map(t.NonEmptyString, innerCodec);
+    const codec = YjsJotai.map(NonEmptyString, innerCodec);
 
     it("should return a map of decoded values", () => {
       Store.closure((store) => {
@@ -121,11 +122,11 @@ describe("YjsJotai.map", () => {
 
         store.set(myAtom, (_current, operations) => {
           operations.set(
-            "1" as t.NonEmptyString,
+            "1" as NonEmptyString,
             decodeInner(new Y.Map([["a", "1"]]))
           );
           operations.set(
-            "2" as t.NonEmptyString,
+            "2" as NonEmptyString,
             decodeInner(new Y.Map([["a", "2"]]))
           );
         });
@@ -151,7 +152,7 @@ describe("YjsJotai.map", () => {
       const complexCodec = YjsJotai.map(
         t.string,
         t.type({
-          a: t.BooleanFromString,
+          a: BooleanFromString,
         })
       );
       const docCodec = YjsJotai.doc({

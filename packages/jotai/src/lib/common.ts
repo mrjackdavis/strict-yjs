@@ -1,6 +1,6 @@
-import { assert, t } from "@strict-yjs/utils";
-import { atom, WritableAtom, Atom } from "jotai";
+import { Atom, WritableAtom } from "jotai";
 import * as Y from "yjs";
+import { assert, t } from "./utils";
 export type YMapDomain = string;
 
 export function yMapToShallowJson<T>(yMap: Y.Map<T>): Record<YMapDomain, T> {
