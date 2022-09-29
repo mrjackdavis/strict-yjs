@@ -1,6 +1,6 @@
 {
   "name": "@strict-yjs/jotai",
-  "version": "0.0.3-alpha.5",
+  "version": "0.0.4",
   "private": false,
   "repository": {
     "url": "https://github.com/mrjackdavis/strict-yjs"
