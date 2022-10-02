@@ -128,13 +128,14 @@ describe("YjsJotai.array", () => {
   });
   describe("array.make", () => {
     it("should force strict types", () => {
-      const complexCodec = YjsJotai.array(BooleanFromString);
+      const boolArr = YjsJotai.array(BooleanFromString);
+      const bar = YjsJotai.type(
+        t.type({
+          baz: t.maybeUndefined(boolArr),
+        })
+      );
       const docCodec = YjsJotai.doc({
-        things: YjsJotai.type(
-          t.type({
-            stuff: t.maybeUndefined(complexCodec),
-          })
-        ),
+        foo: bar,
       });
 
       const yDoc = new Y.Doc();
@@ -142,25 +143,23 @@ describe("YjsJotai.array", () => {
 
       Store.closure((store) => {
         const doc = store.get(docAtom);
-        assert.invariant(doc?.things, "");
+        assert.invariant(doc?.foo, "");
 
-        const arrayItemAtom = t.decodeOrThrow(complexCodec)(new Y.Array());
+        const arrayItemAtom = boolArr.make([true, false, true, false]);
+
         // fixMe: ensure's we're tracking updates
-        store.sub(doc.things);
-        store.sub(arrayItemAtom);
-        store.set(doc.things, () => {
-          return {
-            stuff: arrayItemAtom,
-          };
-        });
-        store.set(arrayItemAtom, (current, ops) => {
-          ops.push(true);
-        });
-        const things = store.get(doc.things);
-        assert.invariant(things?.stuff, "");
-        const stuff = store.get(things.stuff);
+        store.sub(doc.foo);
+        // store.sub(arrayItemAtom);
+        store.set(doc.foo, () => ({
+          baz: arrayItemAtom,
+        }));
 
-        expect(stuff).toEqual([true]);
+        const foo = store.get(doc.foo);
+        assert.invariant(foo?.baz, "");
+        const baz = store.get(foo.baz);
+        assert.invariant(baz, "");
+
+        expect(baz).toEqual([true, false, true, false]);
       });
     });
     it.todo("should have a default value factory");
