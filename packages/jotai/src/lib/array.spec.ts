@@ -28,9 +28,6 @@ describe("YjsJotai.array", () => {
 
         const myAtom = t.decodeOrThrow(codec)(yArray);
 
-        // fixMe: ensure's we're tracking updates
-        store.sub(myAtom);
-
         store.set(myAtom, (_current, op) => {
           op.push([true, false]);
           op.push(true);
@@ -50,9 +47,6 @@ describe("YjsJotai.array", () => {
         yArray.push(["true", "false", "true", "false", "false"]);
 
         const myAtom = t.decodeOrThrow(codec)(yArray);
-
-        // fixMe: ensure's we're tracking updates
-        store.sub(myAtom);
 
         store.set(myAtom, (_current, op) => {
           op.delete(3, 2);
@@ -102,9 +96,6 @@ describe("YjsJotai.array", () => {
         const myAtom = t.decodeOrThrow(codec)(yArray);
         const decodeInnerCodec = t.decodeOrThrow(innerCodec);
 
-        // fixMe: ensure's we're tracking updates
-        store.sub(myAtom);
-
         store.set(myAtom, (_current, op) => {
           op.push([
             decodeInnerCodec(new Y.Map([["a", "1"]])),
@@ -148,9 +139,6 @@ describe("YjsJotai.array", () => {
 
         const arrayItemAtom = boolArr.make([true, false, true, false]);
 
-        // fixMe: ensure's we're tracking updates
-        store.sub(doc.foo);
-        // store.sub(arrayItemAtom);
         store.set(doc.foo, () => ({
           baz: arrayItemAtom,
           // also ensure empty works too
