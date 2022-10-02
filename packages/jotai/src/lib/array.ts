@@ -32,7 +32,7 @@ export const array = <A, O = A>(innerCodec: t.Type<A, O, unknown>) => {
     YjsJotaiAtom<Y.Array<unknown>, A[], PatchFn, void>,
     Y.Array<unknown>,
     unknown,
-    A[]
+    A[] | void
   >(
     `YjsJotaiArrayAtom<${innerCodec.name}>`,
 
@@ -92,8 +92,8 @@ export const array = <A, O = A>(innerCodec: t.Type<A, O, unknown>) => {
       return t.success(decodedAtom);
     },
     Y.Array,
-    (entries = []): Y.Array<unknown> => {
-      const encodedArray = entries.map(
+    (entries): Y.Array<unknown> => {
+      const encodedArray = (entries ?? []).map(
         (entry) => innerCodec.encode(entry) as unknown
       );
 

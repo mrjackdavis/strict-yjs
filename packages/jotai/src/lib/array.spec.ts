@@ -132,6 +132,7 @@ describe("YjsJotai.array", () => {
       const bar = YjsJotai.type(
         t.type({
           baz: t.maybeUndefined(boolArr),
+          baz2: t.maybeUndefined(boolArr),
         })
       );
       const docCodec = YjsJotai.doc({
@@ -152,6 +153,8 @@ describe("YjsJotai.array", () => {
         // store.sub(arrayItemAtom);
         store.set(doc.foo, () => ({
           baz: arrayItemAtom,
+          // also ensure empty works too
+          baz2: boolArr.make(),
         }));
 
         const foo = store.get(doc.foo);
