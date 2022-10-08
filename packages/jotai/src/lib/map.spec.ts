@@ -146,7 +146,41 @@ describe("YjsJotai.map", () => {
         ]);
       });
     });
+
+    it("should be able to return object from patch function", () => {
+      Store.closure((store) => {
+        const yDoc = new Y.Doc();
+        const yMap = yDoc.getMap("MyMap");
+
+        const myAtom = t.decodeOrThrow(codec)(yMap);
+
+        const decodeInner = t.decodeOrThrow(innerCodec);
+
+        // fixMe: ensure's we're tracking updates
+        store.sub(myAtom);
+
+        store.set(myAtom, () => ({
+          ["1" as NonEmptyString]: decodeInner(new Y.Map([["a", "1"]])),
+          ["2" as NonEmptyString]: decodeInner(new Y.Map([["a", "2"]])),
+        }));
+
+        const res = store.get(myAtom);
+
+        assert.invariant(res !== undefined, "");
+
+        expect(Object.keys(res)).toEqual(["1", "2"]);
+
+        const flatRes = Object.entries(res).map(
+          ([key, innerAtom]) => [key, store.get(innerAtom)] as const
+        );
+        expect(flatRes).toEqual([
+          ["1", {a: "1"}],
+          ["2", {a: "2"}],
+        ]);
+      });
+    });
   });
+
   describe("map.make", () => {
     it("should force strict types", () => {
       const complexCodec = YjsJotai.map(

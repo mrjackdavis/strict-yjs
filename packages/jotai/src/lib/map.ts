@@ -31,10 +31,11 @@ type PatchFnOperations<KeyType, ValueType> = {
   delete: (key: KeyType) => void;
 };
 /** a function which returns an object to merge into the original */
-type PatchFn<KeyType extends string, ValueType> = (
-  current: { [K in KeyType]: ValueType },
-  operations: PatchFnOperations<KeyType, ValueType>
-) => void;
+type PatchFn<KeyType extends string, ValueType> = ((
+    current: { [K in KeyType]: ValueType },
+    operations: PatchFnOperations<KeyType, ValueType>
+  ) => void | undefined)
+  | (() => {[K in KeyType]: ValueType});
 
 export const map = <
   // keys can only be strings
@@ -110,7 +111,14 @@ export const map = <
             delete: (key) => input.delete(key),
           };
 
-          patchFn(original, operations);
+          const patch = patchFn(original, operations);
+          if (patch === undefined) {
+            return
+          }
+
+          for (const [key, val] of Object.entries<A>(patch)) {
+            input.set(keyCodec.encode(key), valueCodec.encode(val));
+          }
         }
         // fix: as AtomA below
       ) as ThisYjsJotaiMapAtom;
