@@ -12,7 +12,8 @@
           }
         ]
       },
-      "outputs": ["{projectRoot}/dist"]
+      "outputs": ["{projectRoot}/dist"],
+      "inputs": ["{projectRoot}/rollup.config.js", "{projectRoot}/src/**/*"]
     },
     "test": {
       "executor": "@nrwl/jest:jest",

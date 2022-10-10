@@ -9,11 +9,6 @@ export default {
       entryFileNames: pkg.main.substring(2),
       format: "cjs",
     },
-    {
-      dir: "./",
-      entryFileNames: pkg.module.substring(2),
-      format: "es",
-    },
   ],
   plugins: [
     typescript({
