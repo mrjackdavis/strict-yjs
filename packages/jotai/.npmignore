@@ -6,3 +6,5 @@ project.json
 nodemon.json
 jest.config.js
 /*.config.*
+
+!/dist
