@@ -83,9 +83,6 @@ describe("YjsJotai.type", () => {
 
         const myAtom = t.decodeOrThrow(codec)(yMap);
 
-        // fixMe: ensure's we're tracking updates
-        store.sub(myAtom);
-
         store.set(myAtom, () => {
           return {
             a: "goodbye",
@@ -111,9 +108,6 @@ describe("YjsJotai.type", () => {
         const yMap = yDoc.getMap("MyMap");
 
         const myAtom = t.decodeOrThrow(complexCodec)(yMap);
-
-        // fixMe: ensure's we're tracking updates
-        store.sub(myAtom);
 
         store.set(myAtom, () => {
           return {
@@ -176,9 +170,6 @@ describe("YjsJotai.type", () => {
 
         const myAtom = t.decodeOrThrow(complexCodec)(yMap);
 
-        // fixMe: ensure's we're tracking updates
-        store.sub(myAtom);
-
         let nestedAtom: t.TypeOf<typeof nestedCodec> | undefined;
         const newNestedAtomYMap = new Y.Map([["b", "hello2"]]);
 
@@ -198,9 +189,6 @@ describe("YjsJotai.type", () => {
         const nestedAtomThroughStore = store.get(myAtom)?.nested;
         expect(nestedAtomThroughStore).toBeDefined();
         assert.invariant(nestedAtomThroughStore !== undefined, "");
-
-        // fixMe: ensure's we're tracking updates
-        store.sub(nestedAtomThroughStore);
 
         store.set(nestedAtomThroughStore, () => ({
           b: "hello3",
@@ -228,9 +216,6 @@ describe("YjsJotai.type", () => {
       Store.closure((store) => {
         const doc = store.get(docAtom);
         assert.invariant(doc?.things, "");
-
-        // fixMe: ensure's we're tracking updates
-        store.sub(doc.things);
 
         store.set(doc.things, (current, ops) =>
           ops.push(

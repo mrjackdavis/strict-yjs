@@ -3,21 +3,30 @@ import { WritableAtom, Atom, unstable_createStore } from "jotai";
 export class Store {
   private readonly internalJotaiStore = unstable_createStore();
 
-  private readonly mountedAtomUnsubscribeFns = new Set<() => void>();
+  private readonly mountedAtoms = new Map<
+    Atom<unknown>,
+    { unsubscribe: () => void }
+  >();
 
   private mount<Value, Update = unknown>(
     atom: Atom<Value> | WritableAtom<Value, Update>,
     onUpdate: () => void = makeNoop()
   ) {
-    const unsub = this.internalJotaiStore.sub(atom, onUpdate);
-    this.mountedAtomUnsubscribeFns.add(unsub);
+    if (this.mountedAtoms.has(atom)) {
+      return;
+    }
+
+    const unsubscribe = this.internalJotaiStore.sub(atom, onUpdate);
+    this.mountedAtoms.set(atom, {
+      unsubscribe,
+    });
   }
 
   public sub = this.mount;
 
   public dispose() {
-    for (const unsubFn of this.mountedAtomUnsubscribeFns) {
-      unsubFn();
+    for (const [_atom, val] of this.mountedAtoms) {
+      val.unsubscribe();
     }
   }
 
@@ -37,7 +46,13 @@ export class Store {
     return this.internalJotaiStore.asyncGet(atom);
   }
 
-  public set = this.internalJotaiStore.set;
+  public set<Value_2, Update, Result extends void | Promise<void>>(
+    atom: WritableAtom<Value_2, Update, Result>,
+    update: Update
+  ): Result {
+    this.mount(atom);
+    return this.internalJotaiStore.set(atom, update);
+  }
 
   public static closure<TFnRes>(fn: (store: Store) => TFnRes) {
     const thisStore = new Store();
@@ -45,7 +60,7 @@ export class Store {
     if (res instanceof Promise) {
       res;
     }
-    thisStore.mountedAtomUnsubscribeFns;
+    thisStore.mountedAtoms;
     thisStore.dispose();
 
     return res;

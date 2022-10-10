@@ -34,9 +34,6 @@ describe("YjsJotai.map", () => {
 
         const myAtom = t.decodeOrThrow(codec)(yMap);
 
-        // fixMe: ensure's we're tracking updates
-        store.sub(myAtom);
-
         store.set(myAtom, (_current, op) => {
           op.set("1" as NonEmptyString, false);
           op.set("2" as NonEmptyString, true);
@@ -60,9 +57,6 @@ describe("YjsJotai.map", () => {
         yMap.set("10", "false");
 
         const myAtom = t.decodeOrThrow(codec)(yMap);
-
-        // fixMe: ensure's we're tracking updates
-        store.sub(myAtom);
 
         store.set(myAtom, (_current, op) => {
           op.delete("2" as NonEmptyString);
@@ -116,9 +110,6 @@ describe("YjsJotai.map", () => {
         const myAtom = t.decodeOrThrow(codec)(yMap);
 
         const decodeInner = t.decodeOrThrow(innerCodec);
-
-        // fixMe: ensure's we're tracking updates
-        store.sub(myAtom);
 
         store.set(myAtom, (_current, operations) => {
           operations.set(
@@ -199,9 +190,6 @@ describe("YjsJotai.map", () => {
       Store.closure((store) => {
         const doc = store.get(docAtom);
         assert.invariant(doc?.things, "");
-
-        // fixMe: ensure's we're tracking updates
-        store.sub(doc.things);
 
         store.set(doc.things, (current, ops) =>
           ops.push(
